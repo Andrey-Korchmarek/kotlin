@@ -9,8 +9,8 @@ fun main() {
     firstName = "Андрей"
     lastName = "Корчмарек"
     height = 1.78
-    weight = 150.4f
-    isChild = {(height < 1.5) || (weight < 40)}
+    weight = 150.2f
+    isChild = {(height < 1.5) || (weight < 40.0f)}
     info = {"""Меня зовут $firstName $lastName. 
     Я ${if (isChild()) "ребёнок" else "взрослый"} ростом $height метров и весом $weight кг.""".trimMargin()}
     println(info())
