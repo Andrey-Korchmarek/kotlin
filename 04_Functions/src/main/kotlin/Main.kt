@@ -102,5 +102,5 @@ fun main(args: Array<String>) {
     val flag : String? = if (args.size <= 1) null else args[1]
     val args0: String = if (args.size == 0) "F2p)v\"y233{0->c}ttelciFc" else args[0]
     println("${if (flag == "cipher") "Source" else "Encrypted"} string is $args0")
-    println(if (flag == "cipher") "Encrypted string is ${encrypt(args0)}" else "Origin string is ${decrypt(args0)}")
+    println(if (flag == "cipher") {"Encrypted string is ${encrypt(args0)}"} else {"Origin string is ${decrypt(args0)}"})
 }

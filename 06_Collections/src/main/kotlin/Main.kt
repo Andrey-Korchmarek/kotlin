@@ -43,7 +43,7 @@
 fun Int?.lessOrNull(value: Int): Boolean =
     when(this){
         null -> true
-        in Int.MIN_VALUE..value - 1 -> true
+        in Int.MIN_VALUE until value -> true
         in value..Int.MAX_VALUE -> false
         else -> false
     }
@@ -51,10 +51,17 @@ fun Int?.lessOrNull(value: Int): Boolean =
 fun Int?.moreOrNull(value: Int): Boolean =
     when(this){
         null -> true
-        in Int.MIN_VALUE..value -> false
-        in value + 1..Int.MAX_VALUE -> true
+        in Int.MIN_VALUE until value -> false
+        in value..Int.MAX_VALUE -> true
         else -> false
     }
+
+fun readMListOfString(n: Int): MutableList<String> {
+    val telephonNumbers = emptyList<String>().toMutableList()
+    println("Введите $n телефонных номеров")
+    (0 until n).forEach {telephonNumbers.add(it, readLine()!!) }
+    return telephonNumbers
+}
 
 fun main() {
     var n: Int?
@@ -65,7 +72,6 @@ fun main() {
         println("Ошибка: только натуральные числа! Введите ещё раз")
         n = readLine()?.toIntOrNull()
     }
-    println(n)
-
-
+    readMListOfString(n!!).forEach { println(it) }
+    // Программа ещё не доделана. Выполнены пункты 1 - 4
 }
