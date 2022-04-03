@@ -56,7 +56,7 @@ fun Int?.moreOrNull(value: Int): Boolean =
         else -> false
     }
 
-fun messageReadline(message: String, end: String = "\n"): String?{
+fun messageReadline(message: String, end: String = "\n"): String? {
     val result: String?
 
     print(message)
@@ -65,7 +65,7 @@ fun messageReadline(message: String, end: String = "\n"): String?{
     return result
 }
 
-fun readMListOfString(n: Int): MutableList<String> {
+fun readListOfString(n: Int): List<String> {
     val result = emptyList<String>().toMutableList()
 
     println("Введите $n телефонных номеров")
@@ -75,9 +75,9 @@ fun readMListOfString(n: Int): MutableList<String> {
 
 fun main() {
     var n: Int?
-    val phoneNumList: MutableList<String>
+    val phoneNumList: List<String>
     val phoneNumSet: Set<String>
-    val phoneNumMap: Map<String, String?>
+    val phoneNumMap = emptyMap<String, String>() as MutableMap
 
     println("Введите натуральное число")
     n = readLine()?.toIntOrNull()
@@ -85,7 +85,7 @@ fun main() {
         println("Ошибка: только натуральные числа! Введите ещё раз")
         n = readLine()?.toIntOrNull()
     }
-    phoneNumList = readMListOfString(n!!)
+    phoneNumList = readListOfString(n!!)
     phoneNumList.forEach { println(it) }
     println("--------------------------------------------")
     phoneNumList.filter { it.startsWith("+7")}.forEach { println(it) }
@@ -93,6 +93,13 @@ fun main() {
     phoneNumSet = phoneNumList.toSet()
     println(phoneNumSet.size)
     println(phoneNumList.sumOf { it.length })
-    phoneNumMap = HashMap(phoneNumSet.associateWith {messageReadline("Введите имя человека с номером телефона $it:")})
-    phoneNumMap.forEach { (number: String, name: String?) -> println("Абонент: $name. Номер телефона: $number") }
+    //phoneNumMap = HashMap(phoneNumSet.associateWith {messageReadline("Введите имя человека с номером телефона $it:")})
+    //phoneNumMap = phoneNumSet.associateWith {messageReadline("Введите имя человека с номером телефона $it:")} as MutableMap
+    phoneNumSet.associateWithTo(phoneNumMap) {messageReadline("Введите имя человека с номером телефона $it:")!!}
+    fun theTerm(number: String, name: String) = println("Абонент: $name. Номер телефона: $number")
+    phoneNumMap.forEach {theTerm(it.key, it.value)}
+    println("--------------------------------------------")
+    phoneNumMap.entries.sortedBy { it.key }.forEach{ theTerm(it.key, it.value) }
+    println("--------------------------------------------")
+    phoneNumMap.entries.sortedBy { it.value }.forEach{ theTerm(it.key, it.value) }
 }
