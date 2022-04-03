@@ -97,7 +97,7 @@ fun main() {
     //phoneNumMap = phoneNumSet.associateWith {messageReadline("Введите имя человека с номером телефона $it:")} as MutableMap
     phoneNumSet.associateWithTo(phoneNumMap) {messageReadline("Введите имя человека с номером телефона $it:")!!}
     fun theTerm(number: String, name: String) = println("Абонент: $name. Номер телефона: $number")
-    phoneNumMap.forEach {theTerm(it.key, it.value)}
+    phoneNumMap.forEach { (key, value) -> theTerm(key, value)}
     println("--------------------------------------------")
     phoneNumMap.entries.sortedBy { it.key }.forEach{ theTerm(it.key, it.value) }
     println("--------------------------------------------")
