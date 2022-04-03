@@ -56,15 +56,28 @@ fun Int?.moreOrNull(value: Int): Boolean =
         else -> false
     }
 
+fun messageReadline(message: String, end: String = "\n"): String?{
+    val result: String?
+
+    print(message)
+    result = readLine()
+    print(end)
+    return result
+}
+
 fun readMListOfString(n: Int): MutableList<String> {
-    val telephonNumbers = emptyList<String>().toMutableList()
+    val result = emptyList<String>().toMutableList()
+
     println("Введите $n телефонных номеров")
-    (0 until n).forEach {telephonNumbers.add(it, readLine()!!) }
-    return telephonNumbers
+    (0 until n).forEach {result.add(it, readLine()!!) }
+    return result
 }
 
 fun main() {
     var n: Int?
+    val phoneNumList: MutableList<String>
+    val phoneNumSet: Set<String>
+    val phoneNumMap: Map<String, String?>
 
     println("Введите натуральное число")
     n = readLine()?.toIntOrNull()
@@ -72,6 +85,14 @@ fun main() {
         println("Ошибка: только натуральные числа! Введите ещё раз")
         n = readLine()?.toIntOrNull()
     }
-    readMListOfString(n!!).forEach { println(it) }
-    // Программа ещё не доделана. Выполнены пункты 1 - 4
+    phoneNumList = readMListOfString(n!!)
+    phoneNumList.forEach { println(it) }
+    println("--------------------------------------------")
+    phoneNumList.filter { it.startsWith("+7")}.forEach { println(it) }
+    println("--------------------------------------------")
+    phoneNumSet = phoneNumList.toSet()
+    println(phoneNumSet.size)
+    println(phoneNumList.sumOf { it.length })
+    phoneNumMap = HashMap(phoneNumSet.associateWith {messageReadline("Введите имя человека с номером телефона $it:")})
+    phoneNumMap.forEach { (number: String, name: String?) -> println("Абонент: $name. Номер телефона: $number") }
 }
