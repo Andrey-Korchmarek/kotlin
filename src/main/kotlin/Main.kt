@@ -1,7 +1,9 @@
-fun main(args: Array<String>) {
+fun main() {
     println("Hello World!")
-
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-    println("Program arguments: ${args.joinToString()}")
+    var test: Float = 21.0F
+    when {
+        test < 0.0F -> print("1 sector")
+        test > 20.0F -> print("3 sector")
+        else -> print("2 sector")
+    }
 }
