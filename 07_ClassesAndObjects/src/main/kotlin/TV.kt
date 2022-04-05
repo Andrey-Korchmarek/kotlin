@@ -1,4 +1,5 @@
 import com.sun.jdi.VoidValue
+import javax.swing.text.View
 
 class TV(val brand: String, val model: String, val diagonal: UInt) {
     var on: Boolean
