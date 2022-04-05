@@ -29,15 +29,14 @@ class TV(val brand: String, val model: String, val diagonal: UInt) {
 
     fun switchChannel(num: Int) {
         this.on = true
-        val tempChannel: String? = channelList.getOrNull(num)
-        if (tempChannel != null) { this.currentChannel = tempChannel } else { /* do nothing */ }
+        this.currentChannel = channelList.getOrElse(num) { this.currentChannel }
         println("На телевизоре ${this.tvName()} включен канал ${this.currentChannel}.")
     }
 
     fun plusChannel() {
         if (this.on) {
             val channelNumber = channelList.indexOf(this.currentChannel)
-            this.currentChannel = channelList.getOrElse(channelNumber + 1, { channelList[0] })
+            this.currentChannel = channelList.getOrElse(channelNumber + 1) { channelList[0] }
         }
         else this.on = true
         println("На телевизоре ${this.tvName()} включен канал ${this.currentChannel}.")
@@ -46,7 +45,7 @@ class TV(val brand: String, val model: String, val diagonal: UInt) {
     fun minusChannel() {
         if (this.on) {
             val channelNumber = channelList.indexOf(this.currentChannel)
-            this.currentChannel = channelList.getOrElse(channelNumber - 1, {channelList.last()})
+            this.currentChannel = channelList.getOrElse(channelNumber - 1) {channelList.last()}
         }
         else this.on = true
         println("На телевизоре ${this.tvName()} включен канал ${this.currentChannel}.")
@@ -55,7 +54,7 @@ class TV(val brand: String, val model: String, val diagonal: UInt) {
     fun displayChannelList() {
         if (this.on) {
             println("Список каналов телевизора ${this.tvName()}:")
-            channelList.forEachIndexed { index, value -> println("${index + 1} — $value") }
+            channelList.forEachIndexed { index, value -> println("Канал номер ${index + 1} — $value") }
         }
         else { /* do nothing */ }
     }

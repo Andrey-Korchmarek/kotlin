@@ -68,15 +68,50 @@ import kotlin.random.Random
 */
 
 fun main() {
-    val tvSet: Set<List<String>> = setOf(
+    val tvSet: Set<List<String>>
+    val testTvList: MutableList<TV>
+
+    tvSet = setOf(
         listOf("Xiaomi", "Mi TV P1 43", "43"),
         listOf("Philips", "65PUS7406/60", "65"),
         listOf("LG", "50UP75006LF", "50"),
         listOf("Samsung", "UE32T4500AU", "32"),
         listOf("Sony", " KD-55A8", "55")
     )
-    val testTvList: MutableList<TV> = emptyList<TV>().toMutableList()
+    testTvList = emptyList<TV>().toMutableList()
     tvSet.forEach() { testTvList.add(TV(it[0], it[1], it[2].toUInt())) }
-    testTvList[0].plusChannel()
-    //Программа ещё не доделана. Выполнен пункт 1 - 5
+    println("Начинаем тест партии из ${testTvList.size} телевизоров!")
+    testTvList.forEach() {
+        println("Тестируем телевизор ${it.brand} модель ${it.model} диагональю ${it.diagonal}.")
+        println("Сейчас состояние телевизора: ${ if (it.on) "включён" else "выключен" }.")
+        it.onOrOff()
+        it.printInfo()
+        it.displayChannelList()
+        for (i in 1..(3..7).random()) {
+            if (Random.nextBoolean()) { it.onOrOff() } else {/* do nothing */}
+            it.switchChannel((0..50).random())
+        }
+        for (i in 1..(3..30).random()) {
+            if (Random.nextBoolean()) { it.onOrOff() } else {/* do nothing */}
+            it.plusChannel()
+        }
+        for (i in 1..(3..30).random()) {
+            if (Random.nextBoolean()) { it.onOrOff() } else {/* do nothing */}
+            it.minusChannel()
+        }
+        for (i in 1..(8..16).random()) {
+            if (Random.nextBoolean()) { it.onOrOff() } else {/* do nothing */}
+            it.plusVolume(Random.nextDouble(-1.0, 60.0))
+        }
+        for (i in 1..(8..16).random()) {
+            if (Random.nextBoolean()) { it.onOrOff() } else {/* do nothing */}
+            it.minusVolume(Random.nextDouble(-1.0, 60.0))
+        }
+        it.printInfo()
+        println("Этот телевизор проверен!")
+    }
+    println("Тест окончен!")
+    //Программа ещё не доделана. Выполнен пункт 1 - 6
+    val testCard = MtGCard()
+    println(testCard.equals(0))
 }
