@@ -1,3 +1,5 @@
+import kotlin.random.Random
+
 /*
 Что нужно сделать.
 Создайте собственный класс TV, который описывает множество телевизоров и
@@ -66,9 +68,15 @@
 */
 
 fun main() {
-    println("Hello World!")
-    val myDream = TV("Samsung", "UE32T4500AU LED", 32U)
-    myDream.print()
-    myDream.onOrOff()
-    //Программа ещё не доделана. Выполнен пункт 1
+    val tvSet: Set<List<String>> = setOf(
+        listOf("Xiaomi", "Mi TV P1 43", "43"),
+        listOf("Philips", "65PUS7406/60", "65"),
+        listOf("LG", "50UP75006LF", "50"),
+        listOf("Samsung", "UE32T4500AU", "32"),
+        listOf("Sony", " KD-55A8", "55")
+    )
+    val testTvList: MutableList<TV> = emptyList<TV>().toMutableList()
+    tvSet.forEach() { testTvList.add(TV(it[0], it[1], it[2].toUInt())) }
+    testTvList[0].plusChannel()
+    //Программа ещё не доделана. Выполнен пункт 1 - 5
 }
