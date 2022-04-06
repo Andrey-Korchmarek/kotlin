@@ -1,4 +1,4 @@
-class MtGCard(createArgument: String = "Test") {
+open class MtGCard(createArgument: String = "Test") {
     internal val id: UInt
     val name: String
         get() = if (isOpen) field else Shirt.name

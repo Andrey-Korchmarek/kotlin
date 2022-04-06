@@ -69,7 +69,7 @@ import kotlin.random.Random
 
 fun doNothing() {}
 
-fun doNothingElse(criterion: Boolean, alternative: () -> Unit) = run { if (criterion) doNothing() else alternative() }
+fun doNothingOrElse(criterion: Boolean, alternative: () -> Unit) = run { if (criterion) doNothing() else alternative() }
 
 fun main() {
     val tvSet: Set<List<String>>

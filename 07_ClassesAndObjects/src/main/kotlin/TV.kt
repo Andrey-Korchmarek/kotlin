@@ -1,4 +1,3 @@
-
 class TV(val brand: String, val model: String, val diagonal: UInt) {
     var on: Boolean
         private set
