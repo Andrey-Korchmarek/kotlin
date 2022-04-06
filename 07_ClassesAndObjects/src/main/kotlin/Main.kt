@@ -67,7 +67,7 @@ import kotlin.random.Random
 - Различные выводы в консоль начинаются с новой строки.
 */
 
-fun doNothing() = {}
+fun doNothing() {}
 
 fun doNothingElse(criterion: Boolean, alternative: () -> Unit) = run { if (criterion) doNothing() else alternative() }
 

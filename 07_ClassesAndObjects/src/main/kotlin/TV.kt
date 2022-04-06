@@ -1,5 +1,3 @@
-import com.sun.jdi.VoidValue
-import javax.swing.text.View
 
 class TV(val brand: String, val model: String, val diagonal: UInt) {
     var on: Boolean
@@ -10,78 +8,77 @@ class TV(val brand: String, val model: String, val diagonal: UInt) {
     private var currentVolume: Double
 
     init {
-        tvName = {"${this.brand} ${this.model} диагональю ${this.diagonal}\""}
+        tvName = {"$brand $model диагональю $diagonal\""}
         on = false
         channelList = Channels.getRandomChannels()
         currentChannel = channelList.first()
         currentVolume = 1.0
-        println("Объект телевизор ${this.tvName()} создан.")
+        println("Объект телевизор ${tvName()} создан.")
     }
 
     fun printInfo() {
-        print("Это телевизор ${this.brand}, модель ${this.model} диагональю ${this.diagonal}\". ")
-        if (!this.on) println("Он выключен.")
-        else println("На нём идёт канал ${this.currentChannel} громкостью ${this.currentVolume} дБ.")
+        print("Это телевизор $brand, модель $model диагональю $diagonal\". ")
+        if (!on) println("Он выключен.")
+        else println("На нём идёт канал $currentChannel громкостью $currentVolume дБ.")
     }
     fun onOrOff() {
-        this.on = this.on.not()
-        println("Телевизор ${this.tvName()} ${ if (this.on) "включён" else "выключен" }.")
+        on = on.not()
+        println("Телевизор ${tvName()} ${ if (on) "включён" else "выключен" }.")
     }
 
     fun switchChannel(num: Int) {
-        this.on = true
-        this.currentChannel = channelList.getOrElse(num) { this.currentChannel }
-        println("На телевизоре ${this.tvName()} включен канал ${this.currentChannel}.")
+        on = true
+        currentChannel = channelList.getOrElse(num) { this.currentChannel }
+        println("На телевизоре ${tvName()} включен канал $currentChannel.")
     }
 
     fun plusChannel() {
-        if (this.on) {
-            val channelNumber = channelList.indexOf(this.currentChannel)
-            this.currentChannel = channelList.getOrElse(channelNumber + 1) { channelList[0] }
+        if (on) {
+            val channelNumber = channelList.indexOf(currentChannel)
+            currentChannel = channelList.getOrElse(channelNumber + 1) { channelList[0] }
         }
-        else this.on = true
-        println("На телевизоре ${this.tvName()} включен канал ${this.currentChannel}.")
+        else on = true
+        println("На телевизоре ${tvName()} включен канал $currentChannel.")
     }
 
     fun minusChannel() {
-        if (this.on) {
-            val channelNumber = channelList.indexOf(this.currentChannel)
-            this.currentChannel = channelList.getOrElse(channelNumber - 1) {channelList.last()}
+        if (on) {
+            val channelNumber = channelList.indexOf(currentChannel)
+            currentChannel = channelList.getOrElse(channelNumber - 1) {channelList.last()}
         }
-        else this.on = true
-        println("На телевизоре ${this.tvName()} включен канал ${this.currentChannel}.")
+        else on = true
+        println("На телевизоре ${tvName()} включен канал $currentChannel.")
     }
 
     fun displayChannelList() {
-        if (this.on) {
-            println("Список каналов телевизора ${this.tvName()}:")
+        if (on) {
+            println("Список каналов телевизора ${tvName()}:")
             channelList.forEachIndexed { index, value -> println("Канал номер ${index + 1} — $value") }
         }
         else { /* do nothing */ }
     }
 
     fun plusVolume(step: Double = 1.0) {
-        if (this.on) {
+        if (on) {
             when {
                 step < 0.0 -> { /* do nothing */ }
-                this.currentVolume + step < 0.0 -> this.currentVolume = 0.0
-                this.currentVolume + step > maxVolume -> this.currentVolume = maxVolume
-                else -> this.currentVolume += step
+                currentVolume + step < 0.0 -> currentVolume = 0.0
+                currentVolume + step > maxVolume -> currentVolume = maxVolume
+                else -> currentVolume += step
             }
-            println("Громкость телевизора ${this.tvName()} увеличена до $currentVolume дБ.")
+            println("Громкость телевизора ${tvName()} увеличена до $currentVolume дБ.")
         }
     }
 
-
     fun minusVolume(step: Double = 1.0) {
-        if (this.on) {
+        if (on) {
             when {
                 step < 0.0 -> { /* do nothing */ }
-                this.currentVolume - step < 0.0 -> this.currentVolume = 0.0
-                this.currentVolume - step > maxVolume -> this.currentVolume = maxVolume
-                else -> this.currentVolume -= step
+                currentVolume - step < 0.0 -> currentVolume = 0.0
+                currentVolume - step > maxVolume -> currentVolume = maxVolume
+                else -> currentVolume -= step
             }
-            println("Громкость телевизора ${this.tvName()} уменьшена до $currentVolume дБ.")
+            println("Громкость телевизора ${tvName()} уменьшена до $currentVolume дБ.")
         }
     }
 
