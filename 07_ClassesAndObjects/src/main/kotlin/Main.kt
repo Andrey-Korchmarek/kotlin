@@ -67,9 +67,14 @@ import kotlin.random.Random
 - Различные выводы в консоль начинаются с новой строки.
 */
 
+fun doNothing() = {}
+
+fun doNothingElse(criterion: Boolean, alternative: () -> Unit) = run { if (criterion) doNothing() else alternative() }
+
 fun main() {
     val tvSet: Set<List<String>>
     val testTvList: MutableList<TV>
+    val testCard: MtGCard
 
     tvSet = setOf(
         listOf("Xiaomi", "Mi TV P1 43", "43"),
@@ -80,38 +85,43 @@ fun main() {
     )
     testTvList = emptyList<TV>().toMutableList()
     tvSet.forEach() { testTvList.add(TV(it[0], it[1], it[2].toUInt())) }
-    println("Начинаем тест партии из ${testTvList.size} телевизоров!")
-    testTvList.forEach() {
-        println("Тестируем телевизор ${it.brand} модель ${it.model} диагональю ${it.diagonal}.")
-        println("Сейчас состояние телевизора: ${ if (it.on) "включён" else "выключен" }.")
-        it.onOrOff()
-        it.printInfo()
-        it.displayChannelList()
-        for (i in 1..(3..7).random()) {
-            if (Random.nextBoolean()) { it.onOrOff() } else {/* do nothing */}
-            it.switchChannel((0..50).random())
+    doNothingElse(false) {
+        println("Начинаем тест партии из ${testTvList.size} телевизоров!")
+        testTvList.forEach() {
+            println("Тестируем телевизор ${it.brand} модель ${it.model} диагональю ${it.diagonal}.")
+            println("Сейчас состояние телевизора: ${if (it.on) "включён" else "выключен"}.")
+            it.onOrOff()
+            it.printInfo()
+            it.displayChannelList()
+            for (i in 1..(3..7).random()) {
+                if (Random.nextBoolean()) it.onOrOff() else doNothing()
+                it.switchChannel((0..50).random())
+            }
+            for (i in 1..(3..30).random()) {
+                if (Random.nextBoolean()) it.onOrOff() else doNothing()
+                it.plusChannel()
+            }
+            for (i in 1..(3..30).random()) {
+                if (Random.nextBoolean()) it.onOrOff() else doNothing()
+                it.minusChannel()
+            }
+            for (i in 1..(8..16).random()) {
+                if (Random.nextBoolean()) it.onOrOff() else doNothing()
+                it.plusVolume(Random.nextDouble(-1.0, 60.0))
+            }
+            for (i in 1..(8..16).random()) {
+                if (Random.nextBoolean()) it.onOrOff() else doNothing()
+                it.minusVolume(Random.nextDouble(-1.0, 60.0))
+            }
+            it.printInfo()
+            println("Этот телевизор проверен!")
         }
-        for (i in 1..(3..30).random()) {
-            if (Random.nextBoolean()) { it.onOrOff() } else {/* do nothing */}
-            it.plusChannel()
-        }
-        for (i in 1..(3..30).random()) {
-            if (Random.nextBoolean()) { it.onOrOff() } else {/* do nothing */}
-            it.minusChannel()
-        }
-        for (i in 1..(8..16).random()) {
-            if (Random.nextBoolean()) { it.onOrOff() } else {/* do nothing */}
-            it.plusVolume(Random.nextDouble(-1.0, 60.0))
-        }
-        for (i in 1..(8..16).random()) {
-            if (Random.nextBoolean()) { it.onOrOff() } else {/* do nothing */}
-            it.minusVolume(Random.nextDouble(-1.0, 60.0))
-        }
-        it.printInfo()
-        println("Этот телевизор проверен!")
+        println("Тест окончен!")
     }
-    println("Тест окончен!")
-    //Программа ещё не доделана. Выполнен пункт 1 - 6
-    val testCard = MtGCard()
-    println(testCard.equals(0))
+    testCard = MtGCard()
+    doNothingElse(false) {
+        testCard.readCard()
+        testCard.turnCard()
+        testCard.readCard()
+    }
 }
