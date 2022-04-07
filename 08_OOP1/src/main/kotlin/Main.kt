@@ -1,9 +1,19 @@
+import kotlin.random.Random
 
-fun or(vararg a: Boolean): Boolean {
-    return a.any { it }
-}
+fun any(vararg a: Boolean): Boolean = a.any { it }
 
 fun main() {
-    if (listOf<Boolean>(true, false, true).any()) println("Hello World!")
+    if (listOf<Boolean>(false, false, false).any {it}) println("Hello World!")
+
+    val testAnimal= Animal("Тест", 100, 100, 100)
+    for (i in (1..13)) {
+        print("$i: ")
+        listOf(
+            { with(testAnimal) { eat() } },
+            { testAnimal.move() },
+            { testAnimal.sleep() },
+        ).random()
+    }
+    println("Конец программы.")
 
 }

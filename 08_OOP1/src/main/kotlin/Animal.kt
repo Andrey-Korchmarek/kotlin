@@ -1,6 +1,6 @@
 import kotlin.random.Random
 
-class Animal(
+open class Animal(
     val name: String,
     val maxAge: Int,
     var energy: Int,
@@ -8,10 +8,14 @@ class Animal(
 ) {
     var currentAge: Int
     val isTooOld: () -> Boolean
+    protected var moveMessage: String
+    protected var bornMessage: String
 
     init {
         currentAge = 0
         isTooOld = { currentAge >= maxAge }
+        moveMessage = "передвигается"
+        bornMessage = "о животное"
     }
 
     fun sleep() {
@@ -19,7 +23,7 @@ class Animal(
             energy += 5
             currentAge += 1
             println("$name спит.")
-        } else {}
+        }
     }
 
     fun eat() {
@@ -28,22 +32,24 @@ class Animal(
             weight += 1
             tryIncrementAge()
             println("$name ест.")
-        } else {}
-    }
-
-    fun move() {
-        if (listOf<Boolean>(energy < 5, weight < 1, isTooOld()).any()) {}
-        else {
-            energy -= 5
-            weight -= 1
-            tryIncrementAge()
-            println("$name передвигается.")
         }
     }
 
-    fun bear() {
-
+    open fun move() {
+        if (!any(energy < 5, weight < 1, isTooOld())) {
+            energy -= 5
+            weight -= 1
+            tryIncrementAge()
+            println("$name $moveMessage.")
+        }
     }
 
-    protected fun tryIncrementAge(): Unit { if (Random.nextBoolean()) { currentAge += 1 } else {} }
+    open fun bear(): Animal {
+        val newAnimal = Animal(this.name, this.maxAge, (1..10).random(), (1..5).random())
+        println("Рожден$bornMessage ${newAnimal.name} весом ${newAnimal.weight} " +
+                "с энергией${newAnimal.energy} и максимальным возрастом ${newAnimal.maxAge}")
+        return newAnimal
+    }
+
+    protected fun tryIncrementAge() { if (Random.nextBoolean()) { currentAge += 1 } }
 }
