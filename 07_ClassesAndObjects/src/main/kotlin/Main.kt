@@ -85,7 +85,7 @@ fun main() {
     )
     testTvList = emptyList<TV>().toMutableList()
     tvSet.forEach() { testTvList.add(TV(it[0], it[1], it[2].toUInt())) }
-    doNothingElse(false) {
+    doNothingOrElse(false) {
         println("Начинаем тест партии из ${testTvList.size} телевизоров!")
         testTvList.forEach() {
             println("Тестируем телевизор ${it.brand} модель ${it.model} диагональю ${it.diagonal}.")
@@ -119,7 +119,7 @@ fun main() {
         println("Тест окончен!")
     }
     testCard = MtGCard()
-    doNothingElse(false) {
+    doNothingOrElse(false) {
         testCard.readCard()
         testCard.turnCard()
         testCard.readCard()

@@ -6,10 +6,10 @@ open class Animal(
     var energy: Int,
     var weight: Int,
 ) {
-    var currentAge: Int
     val isTooOld: () -> Boolean
     protected var moveMessage: String
     protected var bornMessage: String
+    private var currentAge: Int
 
     init {
         currentAge = 0
@@ -47,9 +47,9 @@ open class Animal(
     open fun bear(): Animal {
         val newAnimal = Animal(this.name, this.maxAge, (1..10).random(), (1..5).random())
         println("Рожден$bornMessage ${newAnimal.name} весом ${newAnimal.weight} " +
-                "с энергией${newAnimal.energy} и максимальным возрастом ${newAnimal.maxAge}")
+                "с энергией ${newAnimal.energy} и максимальным возрастом ${newAnimal.maxAge}")
         return newAnimal
     }
 
-    protected fun tryIncrementAge() { if (Random.nextBoolean()) { currentAge += 1 } }
+    private fun tryIncrementAge() { if (Random.nextBoolean()) { currentAge += 1 } }
 }
