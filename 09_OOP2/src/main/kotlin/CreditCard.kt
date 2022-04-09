@@ -1,8 +1,11 @@
-open class CreditCard(money: Int, maxCredit: Int = 5000) : BankCard(money) {
+open class CreditCard(money: Int, maxCredit: Int) : BankCard(money) {
     protected val creditLimit: Int
+    protected var creditFunds: Int
 
     init {
-        creditLimit = maxCredit
+        if (maxCredit > 0) { creditLimit = maxCredit }
+        else { creditLimit = 0 }
+        creditFunds = creditLimit
     }
 
     override fun topUp(money: Int) {
@@ -10,12 +13,19 @@ open class CreditCard(money: Int, maxCredit: Int = 5000) : BankCard(money) {
     }
 
     override fun pay(money: Int): Boolean {
-        TODO("Not yet implemented")
+        if (money > balance + creditFunds) return false
+        else {
+            balance -= money
+            if (balance < 0) {
+                creditFunds += balance
+                balance = 0
+                return true
+            }
+            else return true
+        }
     }
 
-    override fun balanceInfo() {
-        TODO("Not yet implemented")
-    }
+    override fun balanceInfo() = println("Баланс карты - $balance")
 
     override fun fundsInfo() {
         TODO("Not yet implemented")
