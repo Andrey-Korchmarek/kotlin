@@ -8,9 +8,9 @@ class DebitFreeCard(money: Int, freeCriterion: Int) : DebitCard(money) {
 
     protected fun isFree(): Boolean = if (expensesSum <= 0) true else false
 
-    override fun pay(money: Int): Boolean =
-        if (super.pay(money)) {
-            expensesSum -= money
+    override fun pay(sum: Int): Boolean =
+        if (super.pay(sum)) {
+            expensesSum -= sum
             true
         }
         else false

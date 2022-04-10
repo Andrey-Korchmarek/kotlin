@@ -1,15 +1,15 @@
 open class DebitCard(money: Int) : BankCard(money) {
 
-    override fun topUp(money: Int) {
-        if (money > 0) { balance += money }
+    override fun topUp(sum: Int) {
+        if (sum > 0) { balance += sum }
     }
 
-    override fun pay(money: Int): Boolean =
+    override fun pay(sum: Int): Boolean =
         when {
-            money < 0 -> false
-            balance < money -> false
+            sum < 0 -> false
+            balance < sum -> false
             else -> {
-                balance -= money
+                balance -= sum
                 true
             }
         }

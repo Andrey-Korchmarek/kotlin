@@ -13,9 +13,9 @@ class DebitCashbackConstCard(money: Int, cashback: Int) : DebitCard(money) {
         else {}
     }
 
-    override fun pay(money: Int): Boolean =
-        if (super.pay(money)) {
-            cashback(money)
+    override fun pay(sum: Int): Boolean =
+        if (super.pay(sum)) {
+            cashback(sum)
             true
         }
         else false

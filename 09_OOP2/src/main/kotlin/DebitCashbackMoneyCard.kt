@@ -11,9 +11,9 @@ class DebitCashbackMoneyCard(money: Int, cashback: Int) : DebitCard(money) {
         balance += (sum * refundPercent).toInt()
     }
 
-    override fun pay(money: Int): Boolean =
-        if (super.pay(money)) {
-            cashback(money)
+    override fun pay(sum: Int): Boolean =
+        if (super.pay(sum)) {
+            cashback(sum)
             true
         }
         else false

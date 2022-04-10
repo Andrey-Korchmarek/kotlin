@@ -8,14 +8,24 @@ open class CreditCard(money: Int, maxCredit: Int) : BankCard(money) {
         creditFunds = creditLimit
     }
 
-    override fun topUp(money: Int) {
-        TODO("Not yet implemented")
+    override fun topUp(sum: Int) {
+        when {
+            sum < 0 -> {}
+            creditFunds < creditLimit -> {
+                creditFunds += sum
+                if (creditFunds > creditLimit) {
+                    balance += (creditFunds - creditLimit)
+                    creditFunds = creditLimit
+                } else {}
+            }
+            else -> balance += sum
+        }
     }
 
-    override fun pay(money: Int): Boolean {
-        if (money > balance + creditFunds) return false
+    override fun pay(sum: Int): Boolean {
+        if (sum > balance + creditFunds) return false
         else {
-            balance -= money
+            balance -= sum
             if (balance < 0) {
                 creditFunds += balance
                 balance = 0
@@ -28,6 +38,6 @@ open class CreditCard(money: Int, maxCredit: Int) : BankCard(money) {
     override fun balanceInfo() = println("Баланс карты - $balance")
 
     override fun fundsInfo() {
-        TODO("Not yet implemented")
+        println("Личных средств на карте $balance, доступно кредитных средств $creditFunds")
     }
 }
