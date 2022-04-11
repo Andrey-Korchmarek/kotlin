@@ -20,4 +20,9 @@ class CreditCashbackDiscountCard(money: Int,
             return true
         }
     }
+
+    override fun balanceInfo() {
+        println("Личных средств на карте $balance, доступно кредитных средств $creditFunds, скидка на следующую " +
+                "покупку $discount.")
+    }
 }

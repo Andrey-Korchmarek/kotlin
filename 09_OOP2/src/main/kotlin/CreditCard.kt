@@ -38,6 +38,6 @@ open class CreditCard(money: Int, maxCredit: Int) : BankCard(money) {
     override fun balanceInfo() = println("Баланс карты - $balance")
 
     override fun fundsInfo() {
-        println("Личных средств на карте $balance, доступно кредитных средств $creditFunds")
+        println("Личных средств на карте $balance, доступно кредитных средств $creditFunds.")
     }
 }
