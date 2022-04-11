@@ -1,13 +1,15 @@
 class DebitCashbackMoneyCard(money: Int, cashback: Int) : DebitCard(money) {
 
-    protected val refundPercent: Double
+    private val refundPercent: Double
+    override val infoMessage: () -> String
+        get() = { "${super.infoMessage()}, кэшбэк ${(refundPercent * 100).toInt()} процентов" }
 
     init {
         if (cashback in (0..100)) { refundPercent = cashback * 0.01 }
-        else refundPercent = 0.00
+        else refundPercent = 0.01
     }
 
-    protected fun cashback(sum: Int) {
+    private fun cashback(sum: Int) {
         balance += (sum * refundPercent).toInt()
     }
 
@@ -17,6 +19,4 @@ class DebitCashbackMoneyCard(money: Int, cashback: Int) : DebitCard(money) {
             true
         }
         else false
-
-    override fun fundsInfo() = println("Баланс карты $balance, кэшбэк ${(refundPercent * 100).toInt()}} процентов.")
 }

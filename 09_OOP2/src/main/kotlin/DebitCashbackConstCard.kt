@@ -1,16 +1,17 @@
 class DebitCashbackConstCard(money: Int, cashback: Int) : DebitCard(money) {
-    protected val refundConst: Int
-    protected val refundStart: Int
+    private val refundConst: Int
+    private val refundStart: Int
+    override val infoMessage: () -> String
+        get() = { "${super.infoMessage()}, кэшбэк $refundConst при покупке от $refundStart" }
 
     init {
-        if (cashback > 0) refundConst = cashback
-        else refundConst = 0
+        if (cashback >= 0) refundConst = cashback
+        else refundConst = 1
         refundStart = refundConst * 10
     }
 
-    protected fun cashback(sum: Int) {
+    private fun cashback(sum: Int) {
         if (refundStart <= sum) { balance += refundConst }
-        else {}
     }
 
     override fun pay(sum: Int): Boolean =
@@ -19,6 +20,4 @@ class DebitCashbackConstCard(money: Int, cashback: Int) : DebitCard(money) {
             true
         }
         else false
-
-    override fun fundsInfo() = println("Баланс карты $balance, кэшбэк $refundConst при покупке от $refundStart.")
 }

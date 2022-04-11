@@ -13,8 +13,4 @@ open class DebitCard(money: Int) : BankCard(money) {
                 true
             }
         }
-
-    override fun balanceInfo() = println("Баланс карты: $balance")
-
-    override fun fundsInfo() = balanceInfo()
 }

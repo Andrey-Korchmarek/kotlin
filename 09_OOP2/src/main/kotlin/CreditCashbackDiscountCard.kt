@@ -2,13 +2,15 @@ class CreditCashbackDiscountCard(money: Int,
                                  maxCredit: Int,
                                  cashback: Int,
 ) : CreditCard(money, maxCredit) {
-    protected var discount: Int
-    protected val discountPercent: Double
+    private var discount: Int
+    private val discountPercent: Double
+    override val infoMessage: () -> String
+        get() = { "${super.infoMessage()}, скидка на следующую покупку $discount" }
 
     init {
         discount = 0
         if (cashback in (0..100)) { discountPercent = cashback * 0.01 }
-        else discountPercent = 0.0
+        else discountPercent = 0.01
     }
 
     override fun pay(sum: Int): Boolean {
@@ -19,10 +21,5 @@ class CreditCashbackDiscountCard(money: Int,
             discount = (temp * discountPercent).toInt()
             return true
         }
-    }
-
-    override fun balanceInfo() {
-        println("Личных средств на карте $balance, доступно кредитных средств $creditFunds, скидка на следующую " +
-                "покупку $discount.")
     }
 }

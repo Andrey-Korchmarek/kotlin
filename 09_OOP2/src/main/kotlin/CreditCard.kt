@@ -1,6 +1,8 @@
 open class CreditCard(money: Int, maxCredit: Int) : BankCard(money) {
     protected val creditLimit: Int
     protected var creditFunds: Int
+    override val infoMessage: () -> String
+        get() = { "Личных ${super.infoMessage().lowercase()}, доступно кредитных средств $creditFunds" }
 
     init {
         if (maxCredit > 0) { creditLimit = maxCredit }
@@ -33,11 +35,5 @@ open class CreditCard(money: Int, maxCredit: Int) : BankCard(money) {
             }
             else return true
         }
-    }
-
-    override fun balanceInfo() = println("Баланс карты - $balance")
-
-    override fun fundsInfo() {
-        println("Личных средств на карте $balance, доступно кредитных средств $creditFunds.")
     }
 }

@@ -1,12 +1,17 @@
 class DebitFreeCard(money: Int, freeCriterion: Int) : DebitCard(money) {
-    protected var expensesSum: Int
+    private var expensesSum: Int
+    override val infoMessage: () -> String
+        get() = { "${super.infoMessage()}, ${
+            if (isFree()) "обслуживание в этом месяце бесплатно" 
+            else "до бесплатного обслуживания осталось потратить $expensesSum"
+        }" }
 
     init {
-        if (freeCriterion > 0) { expensesSum = freeCriterion }
+        if (freeCriterion >= 0) { expensesSum = freeCriterion }
         else { expensesSum = Int.MAX_VALUE }
     }
 
-    protected fun isFree(): Boolean = if (expensesSum <= 0) true else false
+    private fun isFree(): Boolean = (expensesSum <= 0)
 
     override fun pay(sum: Int): Boolean =
         if (super.pay(sum)) {
@@ -14,10 +19,4 @@ class DebitFreeCard(money: Int, freeCriterion: Int) : DebitCard(money) {
             true
         }
         else false
-
-    override fun fundsInfo() {
-        print("Баланс карты $balance, ")
-        if (isFree()) println("обслуживание в этом месяце бесплатно.")
-        else println("до бесплатного обслуживания осталось потратить $expensesSum.")
-    }
 }

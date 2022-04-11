@@ -1,11 +1,13 @@
-class CreditBonusCard(money: Int, maxCredit: Int, cashback: Int) : CreditCard(money, maxCredit) {
-    protected var bonusPoints: Int
-    protected val bonusPercent: Double
+class CreditCashbackBonusCard(money: Int, maxCredit: Int, cashback: Int) : CreditCard(money, maxCredit) {
+    private var bonusPoints: Int
+    private val bonusPercent: Double
+    override val infoMessage: () -> String
+        get() = { "${super.infoMessage()}, у вас есть $bonusPoints бонусов" }
 
     init {
         bonusPoints = 0
         if (cashback in 0..100) { bonusPercent = cashback * 0.01 }
-        else { bonusPercent = 0.0 }
+        else { bonusPercent = 0.01 }
     }
 
     override fun pay(sum: Int): Boolean =
@@ -21,8 +23,4 @@ class CreditBonusCard(money: Int, maxCredit: Int, cashback: Int) : CreditCard(mo
             bonusPoints -= sum
             false
         }
-
-    override fun balanceInfo() {
-        println("Личных средств на карте $balance, доступно кредитных средств $creditFunds, бонусов $bonusPoints.")
-    }
 }
