@@ -11,9 +11,9 @@ abstract class AbstractWeapon {
         (1..magazineSize).forEach { _ -> newMagazine.push(createAmmo()) }
         magazine = newMagazine
     }
-    fun fire(): List<Ammo> {
+    fun fire(): MutableList<Ammo> {
         val shots = mutableListOf<Ammo>(Ammo.Blank)
         typeOfFire.fire(magazine, shots)
-        return shots.toList()
+        return shots
     }
 }
