@@ -15,4 +15,7 @@ class Stack<T>(vararg items: T) {
         return temp
     }
     fun isEmpty(): Boolean = (head == null)
+
+    override fun toString(): String =
+        "LAST-> " + head.toString().replace("->", "|") + " <-FIRST"
 }
