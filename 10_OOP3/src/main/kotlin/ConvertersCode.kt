@@ -1,4 +1,4 @@
-enum class ConvertersCode(code: String) {
+enum class ConvertersCode(val code: String) {
     Russia("RUB"),
     USA("USD"),
     Europe("EUR"),
@@ -13,5 +13,4 @@ enum class ConvertersCode(code: String) {
     Switzerland("CHF"),
     OnePiece("OPB"),
     Neverland("NON");
-
 }

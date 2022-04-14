@@ -5,9 +5,17 @@ object Converters {
         RUBConverter(),
         USDConverter(),
         EURConverter(),
+        GBPConverter(),
         CNYConverter(),
         INRConverter(),
         JPYConverter(),
+        KRWConverter(),
+        UAHConverter(),
+        BYNConverter(),
+        KZTConverter(),
+        CHFConverter(),
+        OPBConverter(),
+        NONConverter(),
     )
     fun get(currencyCode: String): CurrencyConverter = converters.find { it.currencyCode == currencyCode }?:
     object : CurrencyConverter {
