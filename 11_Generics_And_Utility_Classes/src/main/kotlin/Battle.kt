@@ -13,8 +13,6 @@ class Battle(val com1: Team, val com2: Team) {
         }
     fun battleIteration() {
         println(history.last().message)
-        com1.teamList.shuffle()
-        com2.teamList.shuffle()
         val one = com1.teamList
         val two = com2.teamList
         val a = one.size
@@ -30,7 +28,7 @@ class Battle(val com1: Team, val com2: Team) {
                 else -> println("1team№$i and 2team№$i survived.")
             }
         }
-        when(a != b) {
+        when {
             a < b -> (a until  b).forEach {
                 val enemy = one.random()
                 two[it].attack(enemy)
@@ -43,12 +41,15 @@ class Battle(val com1: Team, val com2: Team) {
                 if (enemy.isKilled()) println("1team№$it kill random from 2team.")
                 else println("1team№$it attack random from 2team.")
             }
+            else -> doNothing()
         }
         println("Warriors do their special actions.")
         one.forEach { it.specialAction(one.random()) }
         two.forEach { it.specialAction(one.random()) }
         one.removeIf { it.isKilled() }
         two.removeIf { it.isKilled() }
+        com1.teamList.shuffle()
+        com2.teamList.shuffle()
         history.add(getStateOfBattle())
         if (!com1.isHaveCommander() || !com2.isHaveCommander()) {
             battleIsOver = true
@@ -56,5 +57,6 @@ class Battle(val com1: Team, val com2: Team) {
             println("TEAM2 $com2")
             println(history.last().message)
         }
+        else doNothing()
     }
 }

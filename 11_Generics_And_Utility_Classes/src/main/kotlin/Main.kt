@@ -1,5 +1,7 @@
 import kotlin.random.Random
 
+fun doNothing() {}
+
 fun Int.chance(limit: Int = 100): Boolean =
     when{
         this <= 0 -> false
@@ -10,7 +12,7 @@ fun Int.chance(limit: Int = 100): Boolean =
     }
 
 fun main() {
-    val test = Battle(Team(5), Team(5))
+    val test = Battle(Team(7), Team(7))
     while (!test.battleIsOver) {
         test.battleIteration()
     }

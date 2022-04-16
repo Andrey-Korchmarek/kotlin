@@ -4,5 +4,4 @@ interface Warrior {
 
     fun attack(enemy: Warrior)
     fun takeDamage(damage: Int)
-    //fun additionalAction()
 }

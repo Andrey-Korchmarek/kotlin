@@ -5,11 +5,11 @@ class Captain() : AbstractWarrior() {
         override var accuracy: Int = 95
         override val weapon: AbstractWeapon = Weapons.createPistol()
         override fun specialAction(friend: AbstractWarrior) { //Raises morale of allies
-                if (friend is Captain) {}
+                if (friend is Captain) { println("Captain already motivated.") }
                 else {
                         friend.dodgeChance += 1
                         friend.accuracy += 1
-                        println("Captain raised the morale of an ally.")
+                        println("Captain motivates an ally.")
                 }
         }
 }
