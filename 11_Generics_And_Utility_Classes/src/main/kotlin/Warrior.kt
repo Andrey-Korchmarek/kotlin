@@ -1,7 +1,8 @@
 interface Warrior {
     val isKilled: () -> Boolean
-    val dodgeChance: Int
+    var dodgeChance: Int
 
     fun attack(enemy: Warrior)
-    fun getDamage(damage: Int)
+    fun takeDamage(damage: Int)
+    //fun additionalAction()
 }

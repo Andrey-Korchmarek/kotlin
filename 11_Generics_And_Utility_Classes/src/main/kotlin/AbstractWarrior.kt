@@ -1,23 +1,30 @@
 abstract class AbstractWarrior : Warrior {
     abstract val maxHP: Int
-    abstract override val dodgeChance: Int
-    abstract val accuracy: Int
+    abstract override var dodgeChance: Int
+    abstract var accuracy: Int
     abstract val weapon: AbstractWeapon
-    var currentHP: Int = maxHP
-    override val isKilled: () -> Boolean = { (this.currentHP < 1) }
+    abstract var currentHP: Int
+    override val isKilled: () -> Boolean = { (this.currentHP <= 0) }
 
-    override fun getDamage(damage: Int) { currentHP -= damage }
+    override fun takeDamage(damage: Int) {
+        if (currentHP - damage >= maxHP) { currentHP = maxHP }
+        else { currentHP -= damage }
+    }
     override fun attack(enemy: Warrior) {
         if (!weapon.magazineIsEmpty())
-            enemy.getDamage(
+            enemy.takeDamage(
                 weapon.fire().apply {
                     removeIf { !enemy.dodgeChance.chance() && accuracy.chance() }
                 }
                     .sumOf { it.getDamage() }
             )
-        else {
-            weapon.reloading()
-            //пропустить ход
-        }
+        else { weapon.reloading() }
+    }
+
+    open fun specialAction(friend: AbstractWarrior) { //Specific action for this type of warrior
+    }
+
+    override fun toString(): String {
+        return "${this.javaClass.toString()[6]}: HP ${this.currentHP}"
     }
 }

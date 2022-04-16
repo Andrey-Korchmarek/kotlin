@@ -15,12 +15,4 @@ enum class Ammo(
 
     override fun toString(): String =
         "ammo ${this.name}(d: ${this.damage}, ${this.criticalChance}%, x${this.criticalCoefficient})"
-
-    operator fun <T : Ammo> invoke(): T =
-        when(this) {
-            Light -> Light()
-            Simple -> Simple()
-            else -> Special()
-        }
-
 }
