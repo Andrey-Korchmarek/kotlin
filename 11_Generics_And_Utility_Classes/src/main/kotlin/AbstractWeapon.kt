@@ -1,6 +1,6 @@
-abstract class AbstractWeapon(val magazineSize: Int) {
+abstract class AbstractWeapon(private val magazineSize: Int) {
     open var typeOfFire: FireType = FireType.SingleShot
-        set(value) {}
+        set(value) { if (value != field) doNothing() else field = value }
     var magazine: Stack<Ammo> = Stack()
     val magazineIsEmpty: () -> Boolean = { magazine.isEmpty() }
 
@@ -11,7 +11,7 @@ abstract class AbstractWeapon(val magazineSize: Int) {
         magazine = newMagazine
     }
     fun fire(): MutableList<Ammo> {
-        val shots = mutableListOf<Ammo>(Ammo.Blank)
+        val shots: MutableList<Ammo> = mutableListOf(Ammo.Blank)
         typeOfFire.fire(magazine, shots)
         return shots
     }

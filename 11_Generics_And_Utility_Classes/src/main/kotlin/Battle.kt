@@ -1,6 +1,6 @@
 import java.lang.Integer.min
 
-class Battle(val com1: Team, val com2: Team) {
+class Battle(private val com1: Team, private val com2: Team) {
     var battleIsOver: Boolean = false
     private val history: MutableList<BattleState> = mutableListOf(this.getStateOfBattle())
 

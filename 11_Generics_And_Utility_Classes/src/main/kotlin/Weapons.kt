@@ -7,7 +7,7 @@ object Weapons {
     }
     fun createWeapon(): AbstractWeapon = object : AbstractWeapon(40) {
         override var typeOfFire: FireType = FireType.BurstShot(8)
-            set(value) { if (value != field) field = value}
+            set(value) { if (value != field) { field = value } else doNothing() }
         override fun createAmmo(): Ammo = Ammo.Usual
     }
     fun createUzi(): AbstractWeapon = object : AbstractWeapon(60) {

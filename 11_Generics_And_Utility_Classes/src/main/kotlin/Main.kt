@@ -16,5 +16,5 @@ fun main() {
     while (!test.battleIsOver) {
         test.battleIteration()
     }
-    println("Конец программы.")
+    println("End of battle.")
 }

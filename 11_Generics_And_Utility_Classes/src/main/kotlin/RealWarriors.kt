@@ -1,4 +1,4 @@
-class Captain() : AbstractWarrior() {
+class Captain : AbstractWarrior() {
         override val maxHP: Int = 10
         override var currentHP: Int = maxHP
         override var dodgeChance: Int = 95

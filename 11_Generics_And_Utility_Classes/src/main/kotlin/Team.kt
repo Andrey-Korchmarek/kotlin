@@ -17,6 +17,5 @@ class Team(size: Int) {
         }
     }
 
-    fun someMethod() {}
     override fun toString(): String = teamList.toString()
 }
