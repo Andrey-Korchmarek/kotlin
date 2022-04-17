@@ -10,8 +10,8 @@ class Team(size: Int) {
                 0 -> teamList.add(Joker())
                 in 1..5 -> teamList.add(Medic())
                 in 6..15 -> teamList.add(Sniper())
-                in 16..35 -> teamList.add(Terminator())
-                in 36..60 -> teamList.add(Rowdy())
+                in 16..31 -> teamList.add(Terminator())
+                in 32..55 -> teamList.add(Rowdy())
                 else -> teamList.add(Fighter())
             }
         }

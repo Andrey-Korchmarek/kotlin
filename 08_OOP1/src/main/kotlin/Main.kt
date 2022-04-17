@@ -17,6 +17,4 @@ fun main() {
     }
     println("В заповеднике осталось ${testNature.elements.size} животных.")
     println("Конец программы.")
-
-
 }

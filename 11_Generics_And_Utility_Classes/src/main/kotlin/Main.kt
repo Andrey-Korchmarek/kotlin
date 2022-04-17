@@ -12,7 +12,7 @@ fun Int.chance(limit: Int = 100): Boolean =
     }
 
 fun main() {
-    val test = Battle(Team(7), Team(7))
+    val test = Battle(Random.nextInt(1, 50))
     while (!test.battleIsOver) {
         test.battleIteration()
     }

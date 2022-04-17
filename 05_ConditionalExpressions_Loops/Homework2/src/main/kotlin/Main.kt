@@ -24,8 +24,8 @@ fun fibonacci(n: Int): ULong =
         else -> throw IllegalArgumentException("У ряда фибоначи есть только натуральные номера")
     }
 
-fun main(args: Array<String>) {
-    var n: Int = 0
+fun main() {
+    var n = 0
     var fibonacciNumberN: ULong = 0UL
 
     while (n < 1){

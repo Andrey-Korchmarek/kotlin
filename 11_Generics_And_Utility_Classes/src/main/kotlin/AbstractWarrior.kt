@@ -11,14 +11,16 @@ abstract class AbstractWarrior : Warrior {
         else { currentHP -= damage }
     }
     override fun attack(enemy: Warrior) {
-        if (!weapon.magazineIsEmpty())
+        try {
             enemy.takeDamage(
                 weapon.fire().apply {
                     removeIf { !enemy.dodgeChance.chance() && accuracy.chance() }
                 }
                     .sumOf { it.getDamage() }
             )
-        else { weapon.reloading() }
+        } catch (e: NoAmmoException) {
+            weapon.reloading()
+        }
     }
 
     open fun specialAction(friend: AbstractWarrior) { //Specific action for this type of warrior

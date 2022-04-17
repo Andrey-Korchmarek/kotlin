@@ -16,6 +16,15 @@ class Stack<T>(vararg items: T) {
     }
     fun isEmpty(): Boolean = (head == null)
 
+    /*fun pop(): T {
+        if (head == null) throw EmptyStackException()
+        else {
+            val temp: T = head!!.value
+            head = head?.next
+            return temp
+        }
+    }*/
+
     override fun toString(): String =
         "LAST-> " + head.toString().replace("->", "|") + " <-FIRST"
 }

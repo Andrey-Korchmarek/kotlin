@@ -1,5 +1,5 @@
 class Captain : AbstractWarrior() {
-        override val maxHP: Int = 10
+        override val maxHP: Int = 42
         override var currentHP: Int = maxHP
         override var dodgeChance: Int = 95
         override var accuracy: Int = 95
@@ -46,7 +46,7 @@ class Rowdy : AbstractWarrior() {
 }
 
 class Terminator : AbstractWarrior() {
-        override val maxHP: Int = 400
+        override val maxHP: Int = 200
         override var currentHP: Int = maxHP
         override var dodgeChance: Int = 0
         override var accuracy: Int = 35
