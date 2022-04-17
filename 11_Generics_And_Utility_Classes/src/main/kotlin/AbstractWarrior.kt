@@ -10,7 +10,7 @@ abstract class AbstractWarrior : Warrior {
         if (currentHP - damage >= maxHP) { currentHP = maxHP }
         else { currentHP -= damage }
     }
-    override fun attack(enemy: Warrior) {
+    override fun attack(enemy: Warrior): Boolean {
         try {
             enemy.takeDamage(
                 weapon.fire().apply {
@@ -18,8 +18,10 @@ abstract class AbstractWarrior : Warrior {
                 }
                     .sumOf { it.getDamage() }
             )
+            return true
         } catch (e: NoAmmoException) {
             weapon.reloading()
+            return false
         }
     }
 

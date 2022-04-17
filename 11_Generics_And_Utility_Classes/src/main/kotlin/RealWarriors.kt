@@ -1,7 +1,7 @@
 class Captain : AbstractWarrior() {
-        override val maxHP: Int = 42
+        override val maxHP: Int = 777
         override var currentHP: Int = maxHP
-        override var dodgeChance: Int = 95
+        override var dodgeChance: Int = 99
         override var accuracy: Int = 95
         override val weapon: AbstractWeapon = Weapons.createPistol()
         override fun specialAction(friend: AbstractWarrior) { //Raises morale of allies
@@ -41,7 +41,7 @@ class Rowdy : AbstractWarrior() {
         override val maxHP: Int = 120
         override var currentHP: Int = maxHP
         override var dodgeChance: Int = 65
-        override var accuracy: Int = 90
+        override var accuracy: Int = 60
         override val weapon: AbstractWeapon = Weapons.createUzi()
 }
 

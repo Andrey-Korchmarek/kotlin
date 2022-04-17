@@ -23,8 +23,8 @@ class Battle(count: Int) {
         val a = one.size
         val b = two.size
         for (i in 0 until min(a, b)) {
-            one[i].attack(two[i])
-            two[i].attack(one[i])
+            print("1team№$i ${if (one[i].attack(two[i])) "attack" else "reload" }ing. ")
+            print("1team№$i ${if (two[i].attack(one[i])) "attack" else "reload" }ing. ")
             when {
                 one[i].isKilled() && two[i].isKilled() ->
                     println("1team№$i ${one[i]} and 2team№$i ${two[i]} killed each other.")
@@ -36,15 +36,15 @@ class Battle(count: Int) {
         when {
             a < b -> (a until  b).forEach {
                 val enemy = one.random()
-                two[it].attack(enemy)
-                if (enemy.isKilled()) println("2team№$it kill random from 1team.")
-                else println("2team№$it attack random from 1team.")
+                println("2team№$it ${if (two[it].attack(enemy)) 
+                    "attack random from 1team. ${if (enemy.isKilled()) 
+                        "2team№$it ${two[it]} kill random from 1team $enemy." else ""}" else "reloading."}")
             }
             b < a -> (b until  a).forEach {
                 val enemy = two.random()
-                one[it].attack(enemy)
-                if (enemy.isKilled()) println("1team№$it kill random from 2team.")
-                else println("1team№$it attack random from 2team.")
+                println("1team№$it ${if (one[it].attack(enemy))
+                    "attack random from 2team. ${if (enemy.isKilled())
+                        "1team№$it ${one[it]} kill random from 2team $enemy." else ""}" else "reloading."}")
             }
             else -> doNothing()
         }
