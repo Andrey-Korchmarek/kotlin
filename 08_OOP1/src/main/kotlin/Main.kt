@@ -6,13 +6,19 @@ fun main() {
 
     }
     val testNature = NatureReserve()
-    loop@for (i in (1..21)) {
+    /*loop@for (i in (1..21)) {
         println("Начался $i цикл жизни в заповеднике.")
         testNature.oneTime()
         if (testNature.elements.size == 0) {
             println("К сожалению все животные покинули нас :(")
             break@loop
         }
+        println("$i цикл жизни в заповеднике закончился.")
+    }*/
+    val n = 21
+    for (i in 1..n) {
+        println("Начался $i цикл жизни в заповеднике.")
+        testNature.oneTime()
         println("$i цикл жизни в заповеднике закончился.")
     }
     println("В заповеднике осталось ${testNature.elements.size} животных.")

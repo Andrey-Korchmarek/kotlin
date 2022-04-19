@@ -1,3 +1,5 @@
+import kotlin.random.Random
+
 class NatureReserve {
     var elements: MutableList<Animal>
         private set
@@ -35,7 +37,7 @@ class NatureReserve {
             energySpread.random(), weightSpread.random())) }
     }
     fun oneTime() {
-        val newborn: MutableList<Animal> = emptyList<Animal>().toMutableList()
+        /*val newborn: MutableList<Animal> = emptyList<Animal>().toMutableList()
         elements.forEach { run( setOf(
             { it.sleep() },
             { it.eat() },
@@ -44,6 +46,24 @@ class NatureReserve {
                 ).random() )
         }
         elements.addAll(newborn)
-        elements.removeIf { it.isTooOld() }
+        elements.removeIf { it.isTooOld() }*/
+        elements.forEach { print(it.name + "|") }
+        println()
+        if (elements.size == 0) {
+            println("К сожалению все животные покинули нас :(")
+        }
+        else for (i in elements.indices) {
+            when (Random.nextInt(1, 5)) {
+                1 -> elements[i].sleep()
+                2 -> elements[i].eat()
+                3 -> elements[i].move()
+                4 -> elements.add(elements[i].bear())
+            }
+            if (elements[i].isTooOld()) {
+                elements.removeAt(i)
+                println("${elements[i].name}, светлая тебе память!")
+            }
+
+        }
     }
 }
