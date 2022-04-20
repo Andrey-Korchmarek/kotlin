@@ -1,4 +1,4 @@
-package com.doNothing
+//package com.doNothing
 
 class AKorch() {
     fun doNothing() {}
