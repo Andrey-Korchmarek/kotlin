@@ -65,12 +65,11 @@ fun main(args: Array<String>) {
                     Moderator
                         .generateBarrels
                         .collect { barrel ->
-                            yield()
+                            if (Moderator.isGameOver.value) cancel()
                             player.cards.forEach {
                                 it.searchBarrel(barrel)
                             }
                             Moderator.isGameOver.value = player.cards.any { it.isWinner() }
-                            if (Moderator.isGameOver.value) cancel()
                         }
                 }
             )
