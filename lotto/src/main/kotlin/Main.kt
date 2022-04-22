@@ -76,6 +76,7 @@ fun main(args: Array<String>) {
         }
         jobs.forEach { it.join() }
     }
+    //players.forEach { if (it.cards.any { it.isWinner() }) println("Победитель: ${it.name}") }
     println("Победитель: " + (players.find { it.cards.any { it.isWinner() } } ?: "никто не выиграл ^_^"))
     println("Карты всех игроков:")
     players.forEach { println(it) }

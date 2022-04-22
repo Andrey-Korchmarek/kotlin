@@ -1,4 +1,4 @@
-class Player(private val name: String?, count: ULong) {
+class Player(val name: String?, count: ULong) {
     val cards: List<Card>
     init {
         val tempCards = mutableListOf<Card>()
